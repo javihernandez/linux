@@ -2,7 +2,7 @@
 
 # GPII Linux Clean Script
 #
-# Copyright 2012 OCAD University
+# Copyright 2012 OCAD University, Emergya
 #
 # Licensed under the New BSD license. You may not use this file except in
 # compliance with this License.
@@ -11,6 +11,12 @@
 # https://github.com/gpii/universal/LICENSE.txt
 
 cd node_modules/gsettingsBridge/nodegsettings
+node-waf clean
+rm -rf build
+rm .lock-wscript
+cd ../../..
+
+cd node_modules/dbusBridge/nodedbus
 node-waf clean
 rm -rf build
 rm .lock-wscript
