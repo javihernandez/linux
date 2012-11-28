@@ -1,6 +1,7 @@
 Copyright 2012, OCAD University
 Copyright 2012, Steven Githens
 Copyright 2012, Astea Solutions
+Copyright 2012, Emergya
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
