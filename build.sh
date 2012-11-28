@@ -36,7 +36,7 @@ fi
 
 # Compile the GSettings C++ Bridge
 cd node_modules/gsettingsBridge/nodegsettings
-node-waf configure build
+node-gyp configure build
 cd ../../..
 
 # Compile the DBus C++ Bridge
