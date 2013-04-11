@@ -13,7 +13,7 @@
 currentDir=`pwd`
 node_modules="../node_modules"
 universal="../node_modules/universal"
-repoURL="git://github.com/GPII/universal.git"
+repoURL="git://github.com/kaspermarkus/universal.git"
 usbListenerDir="./usbDriveListener"
 gpiiInstallDir="/usr/local/gpii"
 gpiiStateDir="/var/lib/gpii"
