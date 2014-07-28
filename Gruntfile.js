@@ -2,6 +2,7 @@
 GPII Linux Personalization Framework Node.js Bootstrap
 
 Copyright 2014 RTF-US
+Copyright 2014 Emergya
 
 Licensed under the New BSD license. You may not use this file except in
 compliance with this License.
@@ -20,6 +21,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-gpii");
   
     var usbListenerDir = "./usbDriveListener";
+    var gypBuildCmd = "node-gyp configure build";
+    var gypCleanCmd = "node-gyp clean";
     
     function nodeGypShell (cmd, cwd) {
         return {
@@ -49,12 +52,14 @@ module.exports = function(grunt) {
                 stderr: true,
                 failOnError: true
             },
-            compileGSettings: nodeGypShell("node-gyp configure build", "gpii/node_modules/gsettingsBridge/nodegsettings"),
-            cleanGSettings: nodeGypShell("node-gyp clean", "gpii/node_modules/gsettingsBridge/nodegsettings"),
-            compileAlsaBridge: nodeGypShell("node-gyp configure build", "gpii/node_modules/alsa/nodealsa"),
-            cleanAlsaBridge: nodeGypShell("node-gyp clean", "gpii/node_modules/alsa/nodealsa"),
-            compileXrandrBridge: nodeGypShell("node-gyp configure build", "gpii/node_modules/xrandr/nodexrandr"),
-            cleanXrandrBridge: nodeGypShell("node-gyp clean", "gpii/node_modules/xrandr/nodexrandr"),
+            compileGSettings: nodeGypShell(gypBuildCmd, "gpii/node_modules/gsettingsBridge/nodegsettings"),
+            cleanGSettings: nodeGypShell(gypCleanCmd, "gpii/node_modules/gsettingsBridge/nodegsettings"),
+            compileAlsaBridge: nodeGypShell(gypBuildCmd, "gpii/node_modules/alsa/nodealsa"),
+            cleanAlsaBridge: nodeGypShell(gypCleanCmd, "gpii/node_modules/alsa/nodealsa"),
+            compileXrandrBridge: nodeGypShell(gypBuildCmd, "gpii/node_modules/xrandr/nodexrandr"),
+            cleanXrandrBridge: nodeGypShell(gypCleanCmd, "gpii/node_modules/xrandr/nodexrandr"),
+            compilePackageKitBridge: nodeGypCompileShell(gypBuildCmd, "gpii/node_modules/packagekit/nodepackagekit"),
+            cleanPackageKitBridge: nodeGypCleanShell(gypCleanCmd, "gpii/node_modules/packagekit/nodepackagekit"),
             installUsbLib: {
                 command: [
                     "sudo cp " + usbListenerDir + "/gpii-usb-user-listener /usr/bin/",
@@ -81,6 +86,7 @@ module.exports = function(grunt) {
         grunt.task.run("shell:compileGSettings");
         grunt.task.run("shell:compileAlsaBridge");
         grunt.task.run("shell:compileXrandrBridge");
+        grunt.task.run("shell:compilePackageKitBridge");
         grunt.task.run("shell:installUsbLib");
     });
 
@@ -88,6 +94,7 @@ module.exports = function(grunt) {
         grunt.task.run("shell:cleanGSettings");
         grunt.task.run("shell:cleanAlsaBridge");
         grunt.task.run("shell:cleanXrandrBridge");
+        grunt.task.run("shell:cleanPackageKitBridge");
         grunt.task.run("shell:uninstallUsbLib");
     });
 
